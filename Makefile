@@ -25,3 +25,9 @@ rspec:
 
 brakeman:
 	docker-compose run --rm web bundle exec brakeman ${ARG}
+
+reset:
+	docker-compose run --rm web rails db:reset
+
+migrate:
+	docker-compose run --rm web rails db:migrate
