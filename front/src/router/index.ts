@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import LoginButton from "../components/LoginButton.vue";
+import Home from "../pages/Home.vue";
+import Login from "../pages/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -8,7 +9,12 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: LoginButton
+    component: Home
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login
   }
 ];
 
