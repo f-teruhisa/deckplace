@@ -31,6 +31,14 @@ services:
     tty: true
     stdin_open: true
     command: npm run serve
+  swagger:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - './api/app/controllers/api/v1/open_api.yml:/usr/share/nginx/html/open_api.yml'
+    environment:
+      API_URL: open_api.yml
+    ports:
+      - '8081:8080'
 
 volumes:
   mysql_data:
