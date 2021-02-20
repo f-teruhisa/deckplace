@@ -3,7 +3,7 @@ module.exports = {
     enabled: true,
     content: [
       '*.html',
-      './assets/js/main.js'
+      './assets/js/main.ts'
     ]
   },
   theme: {
