@@ -44,10 +44,53 @@
 
 <script>
 import BackButton from "../../components/BackButton";
+import axios from "../../util/axios";
+import qs from "querystring";
 
 export default {
   components: {
     BackButton
+  },
+  name: "logIn",
+  data: function() {
+    return {
+      email: "",
+      password: "",
+      message: ""
+    };
+  },
+  methods: {
+    async login() {
+      const result = await axios
+        .post("/api/v1/login", {
+          user: {
+            email: this.email,
+            password: this.password
+          },
+          paramsSerializer: function(params) {
+            return qs.stringify(params, { arrayFormat: "brackets" });
+          }
+        })
+        .catch(e => {
+          console.error(e);
+        });
+
+      if (!result) {
+        this.message =
+          "エラーが発生しました。再度ログインの操作をお願いします。";
+        return;
+      }
+      if (!result.data) {
+        this.message =
+          "エラーが発生しました。再度ログインの操作をお願いします。";
+        return;
+      }
+
+      if (result.data.state) {
+        // Redirect with result
+        this.$router.push("/home");
+      }
+    }
   }
 };
 </script>

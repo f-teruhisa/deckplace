@@ -8,26 +8,31 @@ up:
 	rm -rf tmp/pids/*
 	docker-compose up
 
+# API
 bundle:
-	docker-compose run --rm web bundle install
+	docker-compose run --rm api bundle install
 
 console:
-	docker-compose run --rm web rails c
+	docker-compose run --rm api rails c
 
 routes:
-	docker-compose run --rm web rails routes
+	docker-compose run --rm api rails routes
 
 rubocop:
-	docker-compose run --rm web bundle exec rubocop -a ${ARG}
+	docker-compose run --rm api bundle exec rubocop -a ${ARG}
 
 rspec:
-	docker-compose run --rm web bundle exec rspec ${ARG}
+	docker-compose run --rm api bundle exec rspec ${ARG}
 
 brakeman:
-	docker-compose run --rm web bundle exec brakeman ${ARG}
+	docker-compose run --rm api bundle exec brakeman ${ARG}
 
 reset:
-	docker-compose run --rm web rails db:reset
+	docker-compose run --rm api rails db:reset
 
 migrate:
-	docker-compose run --rm web rails db:migrate
+	docker-compose run --rm api rails db:migrate
+
+# Front
+prettier-fix:
+	find ./front/ -name \*.js | grep -v ./front/.node_modules/ | grep -v ./front/public/ | xargs ./front/node_modules/.bin/prettier --write --single-quote=true
